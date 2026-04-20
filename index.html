@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eze-ho - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="logo">
+        <span class="logo-icon">📦</span>
+        <h1>Eze-ho</h1>
+      </div>
+      <div class="tabs">
+        <button class="tab active" id="loginTab" onclick="showLogin()">Login</button>
+        <button class="tab" id="signupTab" onclick="showSignup()">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" required placeholder="Enter your email" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="loginPassword" required placeholder="Enter your password" autocomplete="current-password" />
+            <button type="button" class="toggle-password" onclick="togglePassword('loginPassword')">👁️</button>
+          </div>
+        </div>
+        <div class="forgot-link">
+          <a href="#" onclick="openForgotModal();return false;">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn-primary" id="loginBtn">Login</button>
+        <div id="loginError" class="error-msg"></div>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signupForm" style="display:none" onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signupName" required placeholder="Enter your full name" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signupEmail" required placeholder="Enter your email" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="signupPassword" required placeholder="Min 6 characters" minlength="6" autocomplete="new-password" />
+            <button type="button" class="toggle-password" onclick="togglePassword('signupPassword')">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="signupBtn">Create Account</button>
+        <div id="signupMsg" class="info-msg"></div>
+        <div id="signupError" class="error-msg"></div>
+      </form>
+
+      <!-- OTP Form -->
+      <form id="otpForm" style="display:none" onsubmit="verifyOtp(event)">
+        <h3 style="margin-bottom:12px;font-size:1.1rem;color:var(--text)">Verify Your Email</h3>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:16px;">We sent a verification code to your email. Enter it below to complete signup.</p>
+        <div class="form-group">
+          <label>Verification Code</label>
+          <input type="text" id="otpCode" required placeholder="Enter the code (e.g. 6 digits)" />
+        </div>
+        <button type="submit" class="btn-primary" id="otpBtn">Verify Account</button>
+        <div id="otpError" class="error-msg"></div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotModal" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <h3>Reset Password</h3>
+      <p>Enter your email to receive a password reset link.</p>
+      <input type="email" id="forgotEmail" placeholder="Your email address" autocomplete="email" />
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeForgotModal()">Cancel</button>
+        <button class="btn-primary" onclick="sendResetEmail()">Send Reset Link</button>
+      </div>
+      <div id="forgotMsg" class="info-msg" style="margin-top:10px"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
